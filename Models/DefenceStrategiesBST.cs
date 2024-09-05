@@ -92,23 +92,40 @@ namespace TestDataStructures.Models
             }
         }
 
-        public List<string> Find(int value)
+        public TreeNodeProtection Find(int value)
         {
             return FindRecursive(_root, value);
         }
 
-        private List<string> FindRecursive(TreeNodeProtection node, int value)
+        private TreeNodeProtection FindRecursive(TreeNodeProtection node, int value)
         {
             if (node == null)
                 return null;
 
             if (node.MinSeverity <= value && node.MaxSeverity >= value)
-                return node.Defenses;
+                return node;
 
             if (value < node.MinSeverity)
                 return FindRecursive(node.Left, value);
 
             return FindRecursive(node.Right, value);
+        }
+
+        public int? GetMin()
+        {
+            return GetMinRecursive(_root);
+        }
+
+        private int? GetMinRecursive(TreeNodeProtection node)
+        {
+            if (node == null)
+                return null;
+
+            while (node.Left != null)
+            {
+                node = node.Left;
+            }
+            return node.MinSeverity;
         }
     }
 }

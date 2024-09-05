@@ -19,10 +19,23 @@ namespace TestDataStructures.Models
         public async Task StartAttack(Threats thread)
         {
             int severity = thread.Volume * thread.Sophistication + thread.GetConversion();
-            List<string> result = _root.Find(severity);
+            TreeNodeProtection result = _root.Find(severity);
+            if (result == null)
+            {
+                int? minSeverity = _root.GetMin();
+                if (severity < minSeverity)
+                {
+                    Console.WriteLine("Attack is ignored Attack severity is below the threshold.");
+                }
+                else
+                {
+                    Console.WriteLine("The attack was good, no suitable defense was found.");
+                }
+                await Task.Delay(2000);
+            }
             if (result != null)
             {
-                foreach (var item in result)
+                foreach (var item in result.Defenses)
                 {
                     Console.WriteLine($"Threat: {thread.ThreatType}, Defense: {item}");
                     await Task.Delay(2000);
