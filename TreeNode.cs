@@ -10,7 +10,7 @@
 
         public TreeNode(int minSeverity, int maxSeverity, List<string> defenses)
         {
-            this.MinSeverity = minSeverity;
+            MinSeverity = minSeverity;
             this.MaxSeverity = maxSeverity;
             this.Defenses = defenses;
             this.Right = null;
