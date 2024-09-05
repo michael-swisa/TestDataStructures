@@ -63,5 +63,33 @@ namespace TestDataStructures
             }
             return root;
         }
+
+        public void PrintTree()
+        {
+            PrintTree(_root, "", true);
+        }
+
+        private void PrintTree(TreeNodeProtection node, string indent, bool last)
+        {
+            if (node != null)
+            {
+                Console.Write(indent);
+                if (last)
+                {
+                    Console.Write("R----");
+                    indent += "   ";
+                }
+                else
+                {
+                    Console.Write("L----");
+                    indent += "|  ";
+                }
+                Console.WriteLine(
+                    $" Child: [{node.MinSeverity}-{node.MaxSeverity}] Defenses: {string.Join(", ", node.Defenses)}"
+                );
+                PrintTree(node.Left, indent, false);
+                PrintTree(node.Right, indent, true);
+            }
+        }
     }
 }
