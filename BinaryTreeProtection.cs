@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace TestDataStructures
@@ -37,6 +38,30 @@ namespace TestDataStructures
             else // value >= node.Value
                 node.Right = InsertRecursive(node.Right, minSeverity, maxSeverity, defenses);
             return node;
+        }
+
+        public BinaryTreeProtection LoadFromJson(string filePath)
+        {
+            // טעינת הקובץ json
+            string jsonString = File.ReadAllText(filePath);
+
+            // המרה של הקובץ json לליסט של הרבה nodes
+            List<TreeNodeProtection> defenceStrategies = JsonSerializer.Deserialize<
+                List<TreeNodeProtection>
+            >(jsonString);
+
+            // יצירת עץ בינארי חדש
+            BinaryTreeProtection root = new BinaryTreeProtection();
+
+            foreach (TreeNodeProtection defenceStrategy in defenceStrategies)
+            {
+                root.Insert(
+                    defenceStrategy.MinSeverity,
+                    defenceStrategy.MaxSeverity,
+                    defenceStrategy.Defenses
+                );
+            }
+            return root;
         }
     }
 }
