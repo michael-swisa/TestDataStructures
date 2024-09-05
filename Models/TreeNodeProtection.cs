@@ -1,4 +1,4 @@
-﻿namespace TestDataStructures
+﻿namespace TestDataStructures.Models
 {
     internal class TreeNodeProtection
     {
@@ -10,11 +10,11 @@
 
         public TreeNodeProtection(int minSeverity, int maxSeverity, List<string> defenses)
         {
-            this.MinSeverity = minSeverity;
-            this.MaxSeverity = maxSeverity;
-            this.Defenses = defenses;
-            this.Right = null;
-            this.Left = null;
+            MinSeverity = minSeverity;
+            MaxSeverity = maxSeverity;
+            Defenses = defenses;
+            Right = null;
+            Left = null;
         }
     }
 }

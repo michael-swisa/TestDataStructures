@@ -5,7 +5,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace TestDataStructures
+namespace TestDataStructures.Models
 {
     internal class DefenceStrategiesBST
     {
@@ -13,7 +13,7 @@ namespace TestDataStructures
 
         public DefenceStrategiesBST()
         {
-            this._root = null;
+            _root = null;
         }
 
         public void Insert(int minSeverity, int maxSeverity, List<string> defenses)
