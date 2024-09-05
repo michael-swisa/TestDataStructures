@@ -22,8 +22,10 @@ internal class Program
         Console.WriteLine("Binary Tree Protection:");
         await Task.Delay(4000);
         // הדפסת העץ בינארי
-        binaryTreeProtection1.PrintTree();
         binaryTreeProtection.PrintTree();
+        await Task.Delay(4000);
+        binaryTreeProtection1.PrintTree();
+        await Task.Delay(4000);
 
         // יצירת רשימת איומים
         List<Threats> threats = LoadThreats.LoadFromJson(filePathThreats);
