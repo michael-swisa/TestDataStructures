@@ -15,7 +15,7 @@ internal class Program
         DefenceStrategiesBST binaryTreeProtection = new DefenceStrategiesBST();
         DefenceStrategiesBST binaryTreeProtection1 = new DefenceStrategiesBST();
         // טעינת הקובץ json
-        binaryTreeProtection1 = binaryTreeProtection.LoadFromJson(filePathDefence1);
+        binaryTreeProtection1 = binaryTreeProtection1.LoadFromJson(filePathDefence1);
         binaryTreeProtection = binaryTreeProtection.LoadFromJsonNotBalanced(filePathDefence1);
         Console.WriteLine("Loaded from JSON:");
         await Task.Delay(4000);
