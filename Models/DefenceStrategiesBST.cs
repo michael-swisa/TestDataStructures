@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Json;
-using System.Threading.Tasks;
+﻿using System.Text.Json;
 
 namespace TestDataStructures.Models
 {
@@ -16,6 +11,7 @@ namespace TestDataStructures.Models
             _root = null;
         }
 
+        // O(log(n))
         public void Insert(int MinSeverity, int MaxSeverity, List<string> Defenses)
         {
             _root = InsertRecursive(_root, MinSeverity, MaxSeverity, Defenses);
@@ -40,6 +36,7 @@ namespace TestDataStructures.Models
             return node;
         }
 
+        // O(n)
         public DefenceStrategiesBST LoadFromJson(string filePath)
         {
             // טעינת הקובץ json
@@ -64,11 +61,13 @@ namespace TestDataStructures.Models
             return root;
         }
 
+        // O(n)
         public void PrintTree()
         {
             PrintTree(_root, "", true);
         }
 
+        // O(n)
         private void PrintTree(TreeNodeProtection node, string indent, bool last)
         {
             if (node != null)
@@ -76,13 +75,13 @@ namespace TestDataStructures.Models
                 Console.Write(indent);
                 if (last)
                 {
-                    Console.Write("R----");
+                    Console.Write("└──Right");
                     indent += "   ";
                 }
                 else
                 {
-                    Console.Write("L----");
-                    indent += "|  ";
+                    Console.Write("├──Left");
+                    indent += "│  ";
                 }
                 Console.WriteLine(
                     $" Child: [{node.MinSeverity}-{node.MaxSeverity}] Defenses: {string.Join(", ", node.Defenses)}"
@@ -92,11 +91,13 @@ namespace TestDataStructures.Models
             }
         }
 
+        // O(log(n))
         public TreeNodeProtection Find(int value)
         {
             return FindRecursive(_root, value);
         }
 
+        // O(log(n))
         private TreeNodeProtection FindRecursive(TreeNodeProtection node, int value)
         {
             if (node == null)
@@ -111,6 +112,7 @@ namespace TestDataStructures.Models
             return FindRecursive(node.Right, value);
         }
 
+        // O(log(n))
         public int? GetMin()
         {
             return GetMinRecursive(_root);
@@ -127,5 +129,25 @@ namespace TestDataStructures.Models
             }
             return node.MinSeverity;
         }
+
+        //public DefenceStrategiesBST constructBalancedTree(List<TreeNodeProtection> values, int min, int max)
+        //{
+        //    if (min == max)
+        //        return null;
+
+        //    int median = min + (max - min) / 2;
+        //    return new TreeNode
+        //    {
+        //        Value = values[median],
+        //        Left = constructBalancedTree(values, min, median),
+        //        Right = constructBalancedTree(values, median + 1, max)
+        //    };
+        //}
+
+        //public DefenceStrategiesBST constructBalancedTree(IEnumerable<int> values)
+        //{
+        //    return constructBalancedTree(
+        //        values.OrderBy(x => x).ToList(), 0, values.Count());
+        //}
     }
 }

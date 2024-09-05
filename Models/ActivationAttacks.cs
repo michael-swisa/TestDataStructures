@@ -16,6 +16,7 @@ namespace TestDataStructures.Models
             _root = _root.LoadFromJson(filePath);
         }
 
+        // O(n)
         public async Task StartAttack(Threats thread)
         {
             int severity = thread.Volume * thread.Sophistication + thread.GetConversion();
