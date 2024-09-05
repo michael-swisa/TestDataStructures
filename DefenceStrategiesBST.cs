@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace TestDataStructures
 {
-    internal class BinaryTreeProtection
+    internal class DefenceStrategiesBST
     {
         private TreeNodeProtection _root;
 
-        public BinaryTreeProtection()
+        public DefenceStrategiesBST()
         {
             this._root = null;
         }
@@ -40,18 +40,18 @@ namespace TestDataStructures
             return node;
         }
 
-        public BinaryTreeProtection LoadFromJson(string filePath)
+        public DefenceStrategiesBST LoadFromJson(string filePath)
         {
             // טעינת הקובץ json
             string jsonString = File.ReadAllText(filePath);
 
             // המרה של הקובץ json לליסט של הרבה nodes
-            List<TreeNodeProtection> defenceStrategies = JsonSerializer.Deserialize<
+            List<TreeNodeProtection>? defenceStrategies = JsonSerializer.Deserialize<
                 List<TreeNodeProtection>
             >(jsonString);
 
             // יצירת עץ בינארי חדש
-            BinaryTreeProtection root = new BinaryTreeProtection();
+            DefenceStrategiesBST root = new DefenceStrategiesBST();
 
             foreach (TreeNodeProtection defenceStrategy in defenceStrategies)
             {
