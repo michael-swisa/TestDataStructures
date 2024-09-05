@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using TestDataStructures.Models;
 
 namespace TestDataStructures.Models
 {
@@ -50,6 +51,31 @@ namespace TestDataStructures.Models
             // יצירת עץ בינארי חדש
             DefenceStrategiesBST root = new DefenceStrategiesBST();
 
+            //foreach (TreeNodeProtection defenceStrategy in defenceStrategies)
+            //{
+            //    root.Insert(
+            //        defenceStrategy.MinSeverity,
+            //        defenceStrategy.MaxSeverity,
+            //        defenceStrategy.Defenses
+            //    );
+            //}
+            root.constructBalancedTree(defenceStrategies);
+            return root;
+        }
+
+        public DefenceStrategiesBST LoadFromJsonNotBalanced(string filePath)
+        {
+            // טעינת הקובץ json
+            string jsonString = File.ReadAllText(filePath);
+
+            // המרה של הקובץ json לליסט של הרבה nodes
+            List<TreeNodeProtection>? defenceStrategies = JsonSerializer.Deserialize<
+                List<TreeNodeProtection>
+            >(jsonString);
+
+            // יצירת עץ בינארי חדש
+            DefenceStrategiesBST root = new DefenceStrategiesBST();
+
             foreach (TreeNodeProtection defenceStrategy in defenceStrategies)
             {
                 root.Insert(
@@ -58,6 +84,7 @@ namespace TestDataStructures.Models
                     defenceStrategy.Defenses
                 );
             }
+
             return root;
         }
 
@@ -130,24 +157,34 @@ namespace TestDataStructures.Models
             return node.MinSeverity;
         }
 
-        //public DefenceStrategiesBST constructBalancedTree(List<TreeNodeProtection> values, int min, int max)
-        //{
-        //    if (min == max)
-        //        return null;
+        // יצירת עץ בינארי מאוזן
+        public TreeNodeProtection constructBalancedTree(
+            List<TreeNodeProtection> values,
+            int min,
+            int max
+        )
+        {
+            if (min == max)
+                return null;
 
-        //    int median = min + (max - min) / 2;
-        //    return new TreeNode
-        //    {
-        //        Value = values[median],
-        //        Left = constructBalancedTree(values, min, median),
-        //        Right = constructBalancedTree(values, median + 1, max)
-        //    };
-        //}
+            int median = min + (max - min) / 2;
+            return new TreeNodeProtection
+            {
+                MinSeverity = values[median].MinSeverity,
+                MaxSeverity = values[median].MaxSeverity,
+                Defenses = values[median].Defenses,
+                Left = constructBalancedTree(values, min, median),
+                Right = constructBalancedTree(values, median + 1, max)
+            };
+        }
 
-        //public DefenceStrategiesBST constructBalancedTree(IEnumerable<int> values)
-        //{
-        //    return constructBalancedTree(
-        //        values.OrderBy(x => x).ToList(), 0, values.Count());
-        //}
+        public void constructBalancedTree(IEnumerable<TreeNodeProtection> values)
+        {
+            _root = constructBalancedTree(
+                values.OrderBy(x => x.MinSeverity).ToList(),
+                0,
+                values.Count()
+            );
+        }
     }
 }

@@ -7,17 +7,22 @@ internal class Program
         // path to json files
         string filePathDefence =
             @"C:\_kodcode2\Omar\TestDataStructures\FileJson\defenceStrategiesBalanced.json";
+        string filePathDefence1 =
+            @"C:\_kodcode2\Omar\TestDataStructures\FileJson\defenceStrategiesBalanced1.json";
         string filePathThreats = @"C:\_kodcode2\Omar\TestDataStructures\FileJson\Threats.json";
 
         // יצירת עץ בינארי
         DefenceStrategiesBST binaryTreeProtection = new DefenceStrategiesBST();
+        DefenceStrategiesBST binaryTreeProtection1 = new DefenceStrategiesBST();
         // טעינת הקובץ json
-        binaryTreeProtection = binaryTreeProtection.LoadFromJson(filePathDefence);
+        binaryTreeProtection1 = binaryTreeProtection.LoadFromJson(filePathDefence1);
+        binaryTreeProtection = binaryTreeProtection.LoadFromJsonNotBalanced(filePathDefence1);
         Console.WriteLine("Loaded from JSON:");
         await Task.Delay(4000);
         Console.WriteLine("Binary Tree Protection:");
         await Task.Delay(4000);
         // הדפסת העץ בינארי
+        binaryTreeProtection1.PrintTree();
         binaryTreeProtection.PrintTree();
 
         // יצירת רשימת איומים
