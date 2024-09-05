@@ -16,9 +16,9 @@ namespace TestDataStructures.Models
             _root = null;
         }
 
-        public void Insert(int minSeverity, int maxSeverity, List<string> defenses)
+        public void Insert(int MinSeverity, int MaxSeverity, List<string> Defenses)
         {
-            _root = InsertRecursive(_root, minSeverity, maxSeverity, defenses);
+            _root = InsertRecursive(_root, MinSeverity, MaxSeverity, Defenses);
         }
 
         private TreeNodeProtection InsertRecursive(
@@ -90,6 +90,25 @@ namespace TestDataStructures.Models
                 PrintTree(node.Left, indent, false);
                 PrintTree(node.Right, indent, true);
             }
+        }
+
+        public List<string> Find(int value)
+        {
+            return FindRecursive(_root, value);
+        }
+
+        private List<string> FindRecursive(TreeNodeProtection node, int value)
+        {
+            if (node == null)
+                return null;
+
+            if (node.MinSeverity <= value && node.MaxSeverity >= value)
+                return node.Defenses;
+
+            if (value < node.MinSeverity)
+                return FindRecursive(node.Left, value);
+
+            return FindRecursive(node.Right, value);
         }
     }
 }
